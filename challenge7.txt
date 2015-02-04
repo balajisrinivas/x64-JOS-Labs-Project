@@ -1,0 +1,9 @@
+List challenge problems completed as part of the lab 7 handin, as well
+as the problem number.  If you worked any previous lab challenges and
+submitted them with this lab, list them here, along with the lab number.
+
+Lab 5 Challenge 2:
+I implemented an eviction policy for the block cache. Every time a page fault in disk map region occurs, the block is loaded from disk. I recorded the number of page faults and thus the number of blocks loaded due to the page fault in the variable block_cache_count. I also have a constant MAX_BLOCK_CACHE_SIZE in fs/fs.h . When the variable block_cache_count becomes equal to MAX_BLOCK_CACHE_SIZE, EVICT_BLOCK_CACHE_SIZE number of blocks needed to be evicted from the block cache to the disk. The method eviction_policy() in fs/bc.c does this eviction. It starts from block number 3(block after the bitmap block), and flushes those blocks with PTE_A(accessed flag) to the disk, also unmapping the corresponding page from the block cache. The variable eviction_block_count holds the number of blocks evicted at any time.My solution can be testes by running the following commands:
+make clean
+make
+make run-testeviction-nox
